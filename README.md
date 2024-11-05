@@ -46,3 +46,21 @@ CREATE TABLE entries (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+---
+### Setting up NFS on Ubuntu docker container
+
+Set up the actual Ubuntu machine as the server.
+
+Pull the Ubuntu docker container:
+
+```docker pull ubuntu:22.04```
+
+Run it using:
+
+```docker run --privileged -it --name <name> ubuntu:22.04```
+
+Adding ```--privileged``` is very important for mounting.
+
+In the container, run ```apt-get update``` and follow the usual steps for setting up the client and server.
+
+For the server, in the ```/etc/exports``` file, add the ip range of the docker container, usually ```172.17.0.0```.
