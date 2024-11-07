@@ -47,7 +47,7 @@ CREATE TABLE entries (
 );
 ```
 ---
-### Setting up NFS on Ubuntu docker container
+### NFS on Ubuntu docker container
 
 Set up the actual Ubuntu machine as the server.
 
@@ -64,3 +64,22 @@ Adding ```--privileged``` is very important for mounting.
 In the container, run ```apt-get update``` and follow the usual steps for setting up the client and server.
 
 For the server, in the ```/etc/exports``` file, add the ip range of the docker container, usually ```172.17.0.0```.
+---
+### NFS on RHEL container
+
+Login to RedHat Registry:
+
+```docker login registry.redhat.io```
+
+```subscription-manager register --username=<username> --password=<password>```
+
+Pull the RHEL container
+
+```docker run --privileged -v <hostdir>:<containerdir> -it registry.redhat.io/ubi9/ubi /bin/bash```
+
+This is required because the container uses a Overflay filesystem which does not support NFS. So you need to mount a host directory onto the container.
+e.g.
+
+```docker run --privileged -v /mnt/nfs_share:/mnt/nfs_share -it registry.redhat.io/ubi9/ubi /bin/bash```
+
+Follow steps on: ```https://www.redhat.com/en/blog/configure-nfs-linux```
