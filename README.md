@@ -83,3 +83,12 @@ e.g.
 ```docker run --privileged -v /mnt/nfs_share:/mnt/nfs_share -it registry.redhat.io/ubi9/ubi /bin/bash```
 
 Follow steps on: ```https://www.redhat.com/en/blog/configure-nfs-linux```
+
+```systemctl``` won't work so use below commands instead:
+
+```
+rpcbind
+/usr/sbin/rpc.nfsd
+/usr/sbin/rpc.mountd
+/usr/sbin/rpc.statd
+```
