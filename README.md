@@ -64,6 +64,7 @@ Adding ```--privileged``` is very important for mounting.
 In the container, run ```apt-get update``` and follow the usual steps for setting up the client and server.
 
 For the server, in the ```/etc/exports``` file, add the ip range of the docker container, usually ```172.17.0.0```.
+
 ---
 ### NFS on RHEL container
 
